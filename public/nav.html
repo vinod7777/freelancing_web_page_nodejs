@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <title>GigLancer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: rgba(28, 28, 28,0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        } 
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 30px;
+        }
+        .navbar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .navbar .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .navbar .dropdown-content a:hover {
+            background-color: #6c6c6c;
+        }
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-right: 20px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            color: white;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar i {
+            margin-right: 10px;
+        }
+        .navbar .search-bar .search-icon {
+            color: white;
+        }
+        .navbar .search-bar .image-icon {
+            color: white;
+        }
+        .navbar .button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .navbar .button:hover {
+            background-color: #e0e0e0;
+        }
+        .navbar .icons i {
+            margin-right: 20px;
+            cursor: pointer;
+            color: #111;
+        }
+        .navbar .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .container:hover{
+            display: block;
+
+        }
+        
+        
+        .footer {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .footer .column {
+            margin: 10px;
+        }
+        .footer .column h3 {
+            margin-top: 0;
+        }
+        .footer .column a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer .column .social a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .header .nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .header .nav a {
+                margin: 10px 0;
+            }
+            .header .nav.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+        .top-bar {
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: black;
+            font-weight: 550;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-bar a {
+            color: #2f00ff;
+            text-decoration: none;
+        }
+        .subscribe{
+    margin-right:4rem ;
+    margin-top: 2rem;
+}
+.subscribe form{
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+   align-items: last baseline;
+    margin-right: 10px;
+}
+.subscribe form input{
+    padding:0px 0px 0px 10px;
+    margin-bottom: 15px;
+    border: none;
+    height: 2.5rem;
+    width: 14rem;
+}
+.subscribe form button{
+    padding: 10px 30px; 
+    margin-bottom: 10px;
+    background-color: #FF6000;
+    border: 1px solid white;
+    font-weight: 550;
+    transition: all .3s ease;
+}
+.subscribe form button:hover{
+    background-color: transparent;
+    border: 1px solid #FF6000;
+    color: rgb(255, 255, 255);
+}
+.subscribe form p{
+    margin-bottom: 15px;
+    font-weight:bold;
+}
+    </style>
+</head>
+<body>
+    <div  class="navbar">
+        <a class="logo" href="#">
+         GigLancer
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Explore
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+            For You
+          </a>
+          <a href="#">
+           Search & Explore
+          </a>
+          <a href="#">
+            Best of GigLancer
+          </a>
+         </div>
+        </div>
+        <a href="#">
+         Assets
+        </a>
+        <a href="#">
+         Jobs
+        </a>
+        <a href="gig_pro.html">
+         GigLancer
+         <span style="background-color: blue; color: white; padding: 2px 5px; border-radius: 3px;">
+          PRO
+         </span>
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Hire Freelancers
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+         Hire on GigLancer
+          </a>
+          <a href="./categorie.html">
+           Find creatives
+          </a>
+          <a href="./project.html">
+           My Freelance project
+          </a>
+         </div>
+        </div>
+        <div class="search-bar">
+         <i class="fas fa-search search-icon">
+         </i>
+         <input placeholder="Search..." type="text"/>
+         <i class="fas fa-image image-icon">
+         </i>
+        </div>
+        <button  class="button">
+         Share Your Work
+         <div style="display: none; "  class="con">
+            <div class="menu-item">
+                <i class="fas fa-pencil-alt"></i>
+                <div class="text">
+                    <div class="title">Project</div>
+                    <div class="description">Build a complete case study</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard"></i>
+                <div class="text">
+                    <div class="title">Service</div>
+                    <div class="description">Showcase your freelance offerings</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="text">
+                    <div class="title">Work In Progress</div>
+                    <div class="description">Posts that expire in 24 hours</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-video"></i>
+                <div class="text">
+                    <div class="title">Livestream</div>
+                    <div class="description">Broadcast live from your desktop</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+        </div>
+        </button>
+       <a href="chat.html"> <div class="icons">
+         <i class="fas fa-envelope">
+         </i>
+         <i class="fas fa-bell">
+         </i>
+        </div></a>
+        <a href="profile.html">
+        <img alt="Profile picture" class="profile-pic" height="30" src="https://storage.googleapis.com/a1aa/image/l2m9uMDsVaKiLhm5AMk7WHPx8ob6aQtBvh7Gi38bgmEeFp0JA.jpg" width="30"/></a>
+       </div>
+
+
+       
+
+
+
+
+
+
+
+
+    <div class="top-bar">
+        Upgrade to GigLancer Pro today: Get advanced analytics, a custom portfolio website, and more features to grow your creative career.
+        <a href="#">Start your 7-day free trial</a>
+    </div>
+    
+    <div class="footer">
+        <div class="column">
+            <h3>Built For Creatives</h3>
+            <a href="#">Try GigLancer Pro</a>
+            <a href="#">Find Inspiration</a>
+            <a href="#">Get Hired</a>
+            <a href="#">Sell Creative Assets</a>
+            <a href="#">Sell Freelance Services</a>
+        </div>
+        <div class="column">
+            <h3>Find Talent</h3>
+            <a href="#">Post a Job</a>
+            <a href="#">Graphic Designers</a>
+            <a href="#">Photographers</a>
+            <a href="#">Video Editors</a>
+            <a href="#">Web Designers</a>
+            <a href="#">Illustrators</a>
+        </div>
+        <div class="column">
+            <h3>GigLancer</h3>
+            <a href="#">About GigLancer</a>
+            <a href="#">Adobe Portfolio</a>
+            <a href="#">Download the App</a>
+            <a href="#">Blog</a>
+            <a href="#">Careers</a>
+            <a href="#">Help Center</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="column social">
+            <h3>Social</h3>
+            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#"><i class="fab fa-pinterest"></i> Pinterest</a>
+            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <div class="subscribe">
+            <form action="/subscribe" method="post">
+                <p>Subscribe</p>
+                <input class="email" type="email" name="email" placeholder="Enter your email" required>
+                <button class="btn" type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleNav() {
+            var nav = document.querySelector('.header .nav');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

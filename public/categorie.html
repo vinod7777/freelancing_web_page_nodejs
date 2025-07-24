@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <title>GigLancer</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+     .selected {
+      background-color: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+     }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: rgba(28, 28, 28,0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        } 
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 30px;
+        }
+        .navbar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .navbar .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .navbar .dropdown-content a:hover {
+            background-color: #6c6c6c;
+        }
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-right: 20px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            color: white;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar i {
+            margin-right: 10px;
+        }
+        .navbar .search-bar .search-icon {
+            color: white;
+        }
+        .navbar .search-bar .image-icon {
+            color: white;
+        }
+        .navbar .button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .navbar .button:hover {
+            background-color: #e0e0e0;
+        }
+        .navbar .icons i {
+            margin-right: 20px;
+            cursor: pointer;
+            color: #111;
+        }
+        .navbar .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .container:hover{
+            display: block;
+
+        }
+        
+        .footer {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .footer .column {
+            margin: 10px;
+        }
+        .footer .column h3 {
+            margin-top: 0;
+        }
+        .footer .column a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer .column .social a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .header .nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .header .nav a {
+                margin: 10px 0;
+            }
+            .header .nav.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+        .top-bar {
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: black;
+            font-weight: 550;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-bar a {
+            color: #2f00ff;
+            text-decoration: none;
+        }
+        .subscribe{
+    margin-right:4rem ;
+    margin-top: 2rem;
+}
+.subscribe form{
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+   align-items: last baseline;
+    margin-right: 10px;
+}
+.subscribe form input{
+    padding:0px 0px 0px 10px;
+    margin-bottom: 15px;
+    border: none;
+    height: 2.5rem;
+    width: 14rem;
+}
+.subscribe form button{
+    padding: 10px 30px; 
+    margin-bottom: 10px;
+    background-color: #FF6000;
+    border: 1px solid white;
+    font-weight: 550;
+    transition: all .3s ease;
+}
+.subscribe form button:hover{
+    background-color: transparent;
+    border: 1px solid #FF6000;
+    color: rgb(255, 255, 255);
+}
+.subscribe form p{
+    margin-bottom: 15px;
+    font-weight:bold;
+}
+.cat {
+    display: flex;
+    grid-template-columns: auto auto auto;
+  
+    padding: 10px;
+  }
+  .cat  div {
+    background-color: #ffffff;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    margin: 10px ;
+    width: 100px;
+  }
+
+
+ .slider {
+   display: flex;
+   overflow-x: auto;
+   scroll-snap-type: x mandatory;
+   -webkit-overflow-scrolling: touch;
+ }
+ .slider::-webkit-scrollbar {
+   display: none;
+ }
+ .slider-item {
+   flex: none;
+   scroll-snap-align: start;
+   margin-right: 1rem;
+ }
+</style>
+
+   
+</head>
+<body>
+    <div  class="navbar">
+        <a class="logo" href="./main.html">
+         GigLancer
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Explore
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+            For You
+          </a>
+          <a href="#">
+           Search & Explore
+          </a>
+          <a href="#">
+            Best of GigLancer
+          </a>
+         </div>
+        </div>
+        <a href="#">
+         Assets
+        </a>
+        <a href="#">
+         Jobs
+        </a>
+        <a href="gig_pro.html">
+         GigLancer
+         <span style="background-color: blue; color: white; padding: 2px 5px; border-radius: 3px;">
+          PRO
+         </span>
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Hire Freelancers
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+         Hire on GigLancer
+          </a>
+          <a href="#">
+           Find creatives
+          </a>
+          <a href="#">
+           My Freelance project
+          </a>
+         </div>
+        </div>
+        <div class="search-bar">
+         <i class="fas fa-search search-icon">
+         </i>
+         <input placeholder="Search..." type="text"/>
+         <i class="fas fa-image image-icon">
+         </i>
+        </div>
+        <button  class="button">
+         Share Your Work
+         <div style="display: none; "  class="con">
+            <div class="menu-item">
+                <i class="fas fa-pencil-alt"></i>
+                <div class="text">
+                    <div class="title">Project</div>
+                    <div class="description">Build a complete case study</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard"></i>
+                <div class="text">
+                    <div class="title">Service</div>
+                    <div class="description">Showcase your freelance offerings</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="text">
+                    <div class="title">Work In Progress</div>
+                    <div class="description">Posts that expire in 24 hours</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-video"></i>
+                <div class="text">
+                    <div class="title">Livestream</div>
+                    <div class="description">Broadcast live from your desktop</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+        </div>
+        </button>
+       <a href="chat.html"> <div class="icons">
+         <i class="fas fa-envelope">
+         </i>
+         <i class="fas fa-bell">
+         </i>
+        </div></a>
+        <a href="profile.html">
+        <img alt="Profile picture" class="profile-pic" height="30" src="https://storage.googleapis.com/a1aa/image/l2m9uMDsVaKiLhm5AMk7WHPx8ob6aQtBvh7Gi38bgmEeFp0JA.jpg" width="30"/></a>
+       </div>
+
+
+       <main   class="flex">
+        <div>
+            <aside    class="w-64 p-4 border-r border-gray-200 sticky top-20">
+             <button class="bg-blue-600 text-white w-full py-2 rounded mb-4">
+              + New Project
+             </button>
+             <div class="mb-4">
+              <h2 class="text-lg font-semibold mb-2">
+               Type
+              </h2>
+              <div class="space-y-2">
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded">
+                Freelancers
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded">
+                Services
+               </button>
+              </div>
+             </div>
+             <div>
+              <h2 class="text-lg font-semibold mb-2">
+               Categories
+              </h2>
+              <div class="space-y-2">
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                All
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Logo Design
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Branding Services
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Social Media Design
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Website Design
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Illustrations
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Packaging Design
+               </button>
+               <button class="w-full text-left py-2 px-4 border border-gray-300 rounded" onclick="selectCategory(this)">
+                Landing Page Design
+               </button>
+              </div>
+             </div>
+            </aside>
+        </div>
+        <section class="flex-1 p-4">
+         <div style="z-index: 1010;background-color:#ffffff;top: 65px;" class="flex items-center justify-between mb-4 p-4 sticky ">
+          <h1 class="text-2xl font-semibold">
+           Available Freelancers
+          </h1>
+          <div class="flex items-center space-x-4">
+           <input class="border border-gray-300 rounded px-4 py-2" placeholder="Search Creatives..." type="text"/>
+           <select class="border border-gray-300 rounded px-4 py-2">
+            <option>
+             Recommended
+            </option>
+            <option>
+             Newest
+            </option>
+            <option>
+             Popular
+            </option>
+           </select>
+          </div>
+         </div>
+         <div style="background-color: #ffffff;padding:30px;top: 115px;"  class="flex space-x-4 mb-4 sticky ">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="selectCategory(this)">
+           All
+          </button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="selectCategory(this)">
+           Logo Design
+          </button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="selectCategory(this)">
+           Branding Services
+          </button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="selectCategory(this)">
+           Social Media Design
+          </button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="selectCategory(this)">
+           Website Design
+          </button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="selectCategory(this)">
+           Illustrations
+          </button>
+          <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="selectCategory(this)">
+           Packaging Design
+          </button>
+         </div>
+         <div class="bg-white p-4 rounded">
+          <div class="flex items-center justify-between mb-4">
+           <div class="flex items-center space-x-4">
+            <img alt="Freelancer avatar" class="h-16 w-16 rounded-full" height="60" src="https://storage.googleapis.com/a1aa/image/OORpR-N5CizmHC7P_SrRkBwLiotceCPWuPkZsnGyHHU.jpg" width="60"/>
+            <div>
+             <h2 class="text-xl font-semibold">
+              Rafael Serra
+             </h2>
+             <p class="text-gray-600">
+              Porto, Portugal
+             </p>
+            </div>
+           </div>
+           <button class="bg-blue-600 text-white px-4 py-2 rounded">
+            Hire Rafael Serra
+           </button>
+          </div>
+          <div>
+           <h3 class="text-lg font-semibold mb-2">
+            Work
+           </h3>
+           <div class="grid grid-cols-3 gap-4">
+            <img alt="Project 1" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/7FOGVlG563uNVRq5spnQ0DOKLq1btOcGx6X0idzp-vE.jpg" width="100"/>
+            <img alt="Project 2" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/kELAILik3jL5VemNlexNm_hS338jDxvnHdzXcT0ZzeE.jpg" width="100"/>
+            <img alt="Project 3" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/GWatfMalqMVJEBBweZV8mhWMfP9NLBRtXEMH8MEfACc.jpg" width="100"/>
+            <img alt="Project 4" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/OaRjRHyBS0xPBfVZlLS0Am9E34hoUsz5vBfv4CSaHb4.jpg" width="100"/>
+            <img alt="Project 5" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/_PDIO5mTWSZ8U5j8XGriDmJJEu7rlYOjDWazw6letSo.jpg" width="100"/>
+            <img alt="Project 6" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/Brf_yHanOtiEvqEDHv0h6elEzPwctQJuZju_o5vVleQ.jpg" width="100"/>
+           </div>
+           <p class="mt-4 text-gray-600">
+            19 Projects completed on Behance
+           </p>
+          </div>
+         </div>
+
+         <div class="bg-white p-4 rounded mt-5 ">
+            <div class="flex items-center justify-between mb-4">
+             <div class="flex items-center space-x-4">
+              <img alt="Freelancer avatar" class="h-16 w-16 rounded-full" height="60" src="https://storage.googleapis.com/a1aa/image/OORpR-N5CizmHC7P_SrRkBwLiotceCPWuPkZsnGyHHU.jpg" width="60"/>
+              <div>
+               <h2 class="text-xl font-semibold">
+                Rafael Serra
+               </h2>
+               <p class="text-gray-600">
+                Porto, Portugal
+               </p>
+              </div>
+             </div>
+             <button class="bg-blue-600 text-white px-4 py-2 rounded">
+              Hire Rafael Serra
+             </button>
+            </div>
+            <div>
+             <h3 class="text-lg font-semibold mb-2">
+              Work
+             </h3>
+             <div class="grid grid-cols-3 gap-4">
+              <img alt="Project 1" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/7FOGVlG563uNVRq5spnQ0DOKLq1btOcGx6X0idzp-vE.jpg" width="100"/>
+              <img alt="Project 2" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/kELAILik3jL5VemNlexNm_hS338jDxvnHdzXcT0ZzeE.jpg" width="100"/>
+              <img alt="Project 3" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/GWatfMalqMVJEBBweZV8mhWMfP9NLBRtXEMH8MEfACc.jpg" width="100"/>
+              <img alt="Project 4" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/OaRjRHyBS0xPBfVZlLS0Am9E34hoUsz5vBfv4CSaHb4.jpg" width="100"/>
+              <img alt="Project 5" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/_PDIO5mTWSZ8U5j8XGriDmJJEu7rlYOjDWazw6letSo.jpg" width="100"/>
+              <img alt="Project 6" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/Brf_yHanOtiEvqEDHv0h6elEzPwctQJuZju_o5vVleQ.jpg" width="100"/>
+             </div>
+             <p class="mt-4 text-gray-600">
+              19 Projects completed on Behance
+             </p>
+            </div>
+           </div>
+
+           <div class="bg-white p-4 rounded mt-5">
+            <div class="flex items-center justify-between mb-4">
+             <div class="flex items-center space-x-4">
+              <img alt="Freelancer avatar" class="h-16 w-16 rounded-full" height="60" src="https://storage.googleapis.com/a1aa/image/OORpR-N5CizmHC7P_SrRkBwLiotceCPWuPkZsnGyHHU.jpg" width="60"/>
+              <div>
+               <h2 class="text-xl font-semibold">
+                Rafael Serra
+               </h2>
+               <p class="text-gray-600">
+                Porto, Portugal
+               </p>
+              </div>
+             </div>
+             <button class="bg-blue-600 text-white px-4 py-2 rounded">
+              Hire Rafael Serra
+             </button>
+            </div>
+            <div>
+             <h3 class="text-lg font-semibold mb-2">
+              Work
+             </h3>
+             <div class="grid grid-cols-3 gap-4">
+              <img alt="Project 1" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/7FOGVlG563uNVRq5spnQ0DOKLq1btOcGx6X0idzp-vE.jpg" width="100"/>
+              <img alt="Project 2" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/kELAILik3jL5VemNlexNm_hS338jDxvnHdzXcT0ZzeE.jpg" width="100"/>
+              <img alt="Project 3" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/GWatfMalqMVJEBBweZV8mhWMfP9NLBRtXEMH8MEfACc.jpg" width="100"/>
+              <img alt="Project 4" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/OaRjRHyBS0xPBfVZlLS0Am9E34hoUsz5vBfv4CSaHb4.jpg" width="100"/>
+              <img alt="Project 5" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/_PDIO5mTWSZ8U5j8XGriDmJJEu7rlYOjDWazw6letSo.jpg" width="100"/>
+              <img alt="Project 6" class="w-full h-24 object-cover rounded" height="100" src="https://storage.googleapis.com/a1aa/image/Brf_yHanOtiEvqEDHv0h6elEzPwctQJuZju_o5vVleQ.jpg" width="100"/>
+             </div>
+             <p class="mt-4 text-gray-600">
+              19 Projects completed on Behance
+             </p>
+            </div>
+           </div>
+        </section>
+       </main>
+
+
+
+
+
+
+    <div  style="z-index: 1010;" class="top-bar">
+        Upgrade to GigLancer Pro today: Get advanced analytics, a custom portfolio website, and more features to grow your creative career.
+        <a href="#">Start your 7-day free trial</a>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+    <div style="z-index: 1010;" class="footer">
+        <div class="column">
+            <h3>Built For Creatives</h3>
+            <a href="#">Try GigLancer Pro</a>
+            <a href="#">Find Inspiration</a>
+            <a href="#">Get Hired</a>
+            <a href="#">Sell Creative Assets</a>
+            <a href="#">Sell Freelance Services</a>
+        </div>
+        <div class="column">
+            <h3>Find Talent</h3>
+            <a href="#">Post a Job</a>
+            <a href="#">Graphic Designers</a>
+            <a href="#">Photographers</a>
+            <a href="#">Video Editors</a>
+            <a href="#">Web Designers</a>
+            <a href="#">Illustrators</a>
+        </div>
+        <div class="column">
+            <h3>GigLancer</h3>
+            <a href="#">About GigLancer</a>
+            <a href="#">Adobe Portfolio</a>
+            <a href="#">Download the App</a>
+            <a href="#">Blog</a>
+            <a href="#">Careers</a>
+            <a href="#">Help Center</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="column social">
+            <h3>Social</h3>
+            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#"><i class="fab fa-pinterest"></i> Pinterest</a>
+            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <div class="subscribe">
+            <form action="/subscribe" method="post">
+                <p>Subscribe</p>
+                <input class="email" type="email" name="email" placeholder="Enter your email" required>
+                <button class="btn" type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleNav() {
+            var nav = document.querySelector('.header .nav');
+            nav.classList.toggle('active');
+        }
+    </script>
+    <script>
+        function selectCategory(button) {
+         // Remove 'selected' class from all buttons in both sections
+         document.querySelectorAll('aside button, section button').forEach(btn => btn.classList.remove('selected'));
+         // Add 'selected' class to the clicked button
+         button.classList.add('selected');
+        }
+       </script>
+</body>
+</html>

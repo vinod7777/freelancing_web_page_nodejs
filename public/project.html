@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   GigLancer
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+      
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: rgba(28, 28, 28,0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        } 
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 30px;
+        }
+        .navbar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .navbar .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .navbar .dropdown-content a:hover {
+            background-color: #6c6c6c;
+        }
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-right: 20px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            color: white;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar i {
+            margin-right: 10px;
+        }
+        .navbar .search-bar .search-icon {
+            color: white;
+        }
+        .navbar .search-bar .image-icon {
+            color: white;
+        }
+        .navbar .button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .navbar .button:hover {
+            background-color: #e0e0e0;
+        }
+        .navbar .icons i {
+            margin-right: 20px;
+            cursor: pointer;
+            color: #111;
+        }
+        .navbar .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: black;
+            color: #fff;
+            padding: 20px;
+        }
+        .footer .columns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-left: 5rem;
+        }
+        .footer .column {
+            flex: 1;
+            min-width: 150px;
+            margin: 10px;
+        }
+        .footer .column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .footer .column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer .column ul li {
+            margin-bottom: 8px;
+        }
+        .footer .column ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .top-bar {
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: black;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-bar a {
+            color: #2f00ff;
+            text-decoration: none;
+        }
+        .subscribe{
+    margin-right:4rem ;
+    margin-top: 2rem;
+}
+.subscribe form{
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+   align-items: last baseline;
+    margin-right: 10px;
+}
+.subscribe form input{
+    padding:0px 0px 0px 10px;
+    margin-bottom: 15px;
+    border: none;
+    height: 2.5rem;
+    width: 14rem;
+}
+.subscribe form button{
+    padding: 10px 30px; 
+    margin-bottom: 10px;
+    background-color: #FF6000;
+    border: 1px solid white;
+    font-weight: 550;
+    transition: all .3s ease;
+}
+.subscribe form button:hover{
+    background-color: transparent;
+    border: 1px solid #FF6000;
+    color: rgb(255, 255, 255);
+}
+.subscribe form p{
+    margin-bottom: 15px;
+    font-weight:bold;
+}
+body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .main-content {
+            flex: 1;
+            background-color: #fff;
+            padding: 40px;
+            margin-right: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .main-content h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .main-content .content-options {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .main-content .content-options .option {
+            text-align: center;
+            color: #0073e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .main-content .content-options .option i {
+            font-size: 20px;
+            margin-bottom: 10px;
+            background-color: #e0e7ff;
+            border-radius: 50%;
+            padding: 25px;
+        }
+        .sidebar .section {
+            margin-bottom: 20px;
+        }
+        .sidebar .section h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .sidebar .section .option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #0073e6;
+        }
+        .sidebar .section .option i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .sidebar .buttons {
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .buttons button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .sidebar .buttons .continue {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .sidebar .buttons .save-draft {
+            background-color: #0073e6;
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .main-content {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            .sidebar {
+                width: 100%;
+            }
+        }
+        .sidebar .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            color: grey;
+        }
+        .sidebar .content-grid .option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: grey;
+        }
+        .sidebar .content-grid .option i {
+            font-size: 20px;
+            margin-bottom: 5px;
+            background-color: #e0e7ff;
+            border-radius: 50%;
+            padding: 25px;
+            color: grey;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+  </style>
+ </head>
+ <body>
+    <div  class="navbar">
+        <a class="logo" href="#">
+         GigLancer
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Explore
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+            For You
+          </a>
+          <a href="#">
+           Search & Explore
+          </a>
+          <a href="#">
+            Best of GigLancer
+          </a>
+         </div>
+        </div>
+        <a href="#">
+         Assets
+        </a>
+        <a href="#">
+         Jobs
+        </a>
+        <a href="gig_pro.html">
+         GigLancer
+         <span style="background-color: blue; color: white; padding: 2px 5px; border-radius: 3px;">
+          PRO
+         </span>
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Hire Freelancers
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+         Hire on GigLancer
+          </a>
+          <a href="./categorie.html">
+           Find creatives
+          </a>
+          <a href="#">
+           My Freelance project
+          </a>
+         </div>
+        </div>
+        <div class="search-bar">
+         <i class="fas fa-search search-icon">
+         </i>
+         <input placeholder="Search..." type="text"/>
+         <i class="fas fa-image image-icon">
+         </i>
+        </div>
+        <button  class="button">
+         Share Your Work
+         <div style="display: none; "  class="con">
+            <div class="menu-item">
+                <i class="fas fa-pencil-alt"></i>
+                <div class="text">
+                    <div class="title">Project</div>
+                    <div class="description">Build a complete case study</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard"></i>
+                <div class="text">
+                    <div class="title">Service</div>
+                    <div class="description">Showcase your freelance offerings</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="text">
+                    <div class="title">Work In Progress</div>
+                    <div class="description">Posts that expire in 24 hours</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-video"></i>
+                <div class="text">
+                    <div class="title">Livestream</div>
+                    <div class="description">Broadcast live from your desktop</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+        </div>
+        </button>
+       <a href="chat.html"> <div class="icons">
+         <i class="fas fa-envelope">
+         </i>
+         <i class="fas fa-bell">
+         </i>
+        </div></a>
+        <a href="profile.html">
+        <img alt="Profile picture" class="profile-pic" height="30" src="https://storage.googleapis.com/a1aa/image/l2m9uMDsVaKiLhm5AMk7WHPx8ob6aQtBvh7Gi38bgmEeFp0JA.jpg" width="30"/></a>
+       </div>
+  <div class="container">
+    <div class="main-content" id="main-content">
+     <h2>
+      Start building your project:
+     </h2>
+     <div class="content-options">
+      <div class="option">
+       <label for="image-upload" style="cursor: pointer;">
+        <i class="fas fa-image"></i>
+        <p>
+        Image
+        </p>
+    </label>
+    <input id="image-upload" style="display: none;" type="file" accept="image/*"/>
+    </div>
+    <div class="option">
+    <label for="text-upload" style="cursor: pointer;">
+        <i class="fas fa-font"></i>
+        <p>
+        Text
+        </p>
+    </label>
+    <input id="text-upload" style="display: none;" type="file" accept=".txt,.doc,.docx"/>
+    </div>
+    <div class="option">
+    <label for="photo-grid-upload" style="cursor: pointer;">
+        <i class="fas fa-th"></i>
+        <p>
+        Photo Grid
+        </p>
+    </label>
+    <input id="photo-grid-upload" style="display: none;" type="file" accept="image/*" multiple/>
+    </div>
+    <div class="option">
+    <label for="video-audio-upload" style="cursor: pointer;">
+        <i class="fas fa-video"></i>
+        <p>
+        Video &amp; Audio
+        </p>
+    </label>
+    <input id="video-audio-upload" style="display: none;" type="file" accept="video/*,audio/*"/>
+    </div>
+    <div class="option">
+    <div style="cursor: pointer;" onclick="openModal('embed-modal')">
+        <i class="fas fa-code"></i>
+        <p>
+        Embed
+        </p>
+    </div>
+    </div>
+    
+    <div class="option">
+    <div style="cursor: pointer;" onclick="openModal('prototype-modal')">
+        <i class="fas fa-project-diagram"></i>
+        <p>
+        Prototype
+        </p>
+    </div>
+    </div>
+      <div class="option">
+    <div style="cursor: pointer;" onclick="openModal('3d-modal')">
+        <i class="fas fa-cube"></i>
+        <p>
+         3D
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="sidebar">
+     <div class="section">
+      <h3>
+       Add Content
+      </h3>
+      <div class="content-grid">
+       <div class="option">
+        <label for="image-upload-sidebar" style="cursor: pointer;">
+         <i class="fas fa-image"></i>
+         <p>
+          Image
+         </p>
+        </label>
+        <input id="image-upload-sidebar" style="display: none;" type="file" accept="image/*"/>
+       </div>
+       <div class="option">
+        <label for="text-upload-sidebar" style="cursor: pointer;">
+         <i class="fas fa-font"></i>
+         <p>
+          Text
+         </p>
+        </label>
+        <input id="text-upload-sidebar" style="display: none;" type="file" accept=".txt,.doc,.docx"/>
+       </div>
+       <div class="option">
+        <label for="photo-grid-upload-sidebar" style="cursor: pointer;">
+         <i class="fas fa-th"></i>
+         <p>
+          Photo Grid
+         </p>
+        </label>
+        <input id="photo-grid-upload-sidebar" style="display: none;" type="file" accept="image/*" multiple/>
+       </div>
+       <div class="option">
+        <label for="video-audio-upload-sidebar" style="cursor: pointer;">
+         <i class="fas fa-video"></i>
+         <p>
+          Video/Audio
+         </p>
+        </label>
+        <input id="video-audio-upload-sidebar" style="display: none;" type="file" accept="video/*,audio/*"/>
+       </div>
+       <div class="option">
+        <div style="cursor: pointer;" onclick="openModal('embed-modal')">
+         <i class="fas fa-code"></i>
+         <p>
+          Embed
+         </p>
+        </div>
+       </div>
+       <div class="option">
+        <label for="lightroom-upload-sidebar" style="cursor: pointer;">
+         <i class="fas fa-lightbulb"></i>
+         <p>
+          Lightroom
+         </p>
+        </label>
+        <input id="lightroom-upload-sidebar" style="display: none;" type="file" accept="image/*"/>
+       </div>
+     
+       <div class="option">
+        <div style="cursor: pointer;" onclick="openModal('3d-modal')">
+         <i class="fas fa-cube"></i>
+         <p>
+          3D
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="section">
+      <h3>
+       Edit Project
+      </h3>
+      <div class="content-grid">
+       <div class="option">
+        <div style="cursor: pointer;" onclick="openColorPicker()">
+         <i class="fas fa-paint-brush"></i>
+         <p>
+          Styles
+         </p>
+        </div>
+        <input id="color-picker" onchange="changeBackgroundColor()" style="display: none;" type="color"/>
+       </div>
+       <div class="option">
+        <label for="settings-upload-sidebar" style="cursor: pointer;">
+         <i class="fas fa-cog"></i>
+         <p>
+          Settings
+         </p>
+        </label>
+        <input id="settings-upload-sidebar" style="display: none;" type="file" accept=".json,.xml"/>
+       </div>
+      </div>
+     </div>
+     <div class="buttons">
+      <button class="continue">
+       Continue
+      </button>
+      <button class="save-draft">
+       Save as Draft
+      </button>
+     </div>
+    </div>
+   </div>
+   <div class="modal" id="embed-modal">
+    <div class="modal-content">
+     <span class="close" onclick="closeModal('embed-modal')">
+      &times;
+     </span>
+     <h2>
+      Enter Embed Code
+     </h2>
+     <textarea placeholder="Paste your embed code here..." rows="10" style="width: 100%;"></textarea>
+     <button onclick="closeModal('embed-modal')" style="margin-top: 10px;">
+      Save
+     </button>
+    </div>
+   </div>
+   <div class="modal" id="prototype-modal">
+    <div class="modal-content">
+     <span class="close" onclick="closeModal('prototype-modal')">
+      &times;
+     </span>
+     <h2>
+      Enter Prototype Code
+     </h2>
+     <textarea placeholder="Paste your prototype code here..." rows="10" style="width: 100%;"></textarea>
+     <button onclick="closeModal('prototype-modal')" style="margin-top: 10px;">
+      Save
+     </button>
+    </div>
+   </div>
+   <div class="modal" id="3d-modal">
+    <div class="modal-content">
+     <span class="close" onclick="closeModal('3d-modal')">
+      &times;
+     </span>
+     <h2>
+      Enter 3D Code
+     </h2>
+     <textarea placeholder="Paste your 3D code here..." rows="10" style="width: 100%;"></textarea>
+     <button onclick="closeModal('3d-modal')" style="margin-top: 10px;">
+      Save
+     </button>
+    </div>
+   </div>
+ 
+  <div class="top-bar">
+    Upgrade to GigLancer Pro today: Get advanced analytics, a custom portfolio website, and more features to grow your creative career.
+    <a href="#">Start your 7-day free trial</a>
+</div>
+
+<div class="footer">
+    <div class="columns">
+        <div class="column">
+            <h3>Built For Creatives</h3>
+            <ul>
+                <li><a href="#">Try GigLancer Pro</a></li>
+                <li><a href="#">Find Inspiration</a></li>
+                <li><a href="#">Get Hired</a></li>
+                <li><a href="#">Sell Creative Assets</a></li>
+                <li><a href="#">Sell Freelance Services</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Find Talent</h3>
+            <ul>
+                <li><a href="#">Post a Job</a></li>
+                <li><a href="#">Graphic Designers</a></li>
+                <li><a href="#">Photographers</a></li>
+                <li><a href="#">Video Editors</a></li>
+                <li><a href="#">Web Designers</a></li>
+                <li><a href="#">Illustrators</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>GigLancer</h3>
+            <ul>
+                <li><a href="#">About GigLancer</a></li>
+                <li><a href="#">Adobe Portfolio</a></li>
+                <li><a href="#">Download the App</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Social</h3>
+            <ul>
+                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="subscribe">
+            <form action="/subscribe" method="post">
+                <p>Subscribe</p>
+                <input class="email" type="email" name="email" placeholder="Enter your email" required>
+                <button class="btn" type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</div>
+  <script>
+   function toggleMenu() {
+            var navbar = document.getElementById("navbar");
+            navbar.classList.toggle("responsive");
+        }
+ 
+        function openModal(modalId) {
+                 document.getElementById(modalId).style.display = "block";
+             }
+     
+             function closeModal(modalId) {
+                 document.getElementById(modalId).style.display = "none";
+             }
+     
+             function openColorPicker() {
+                 document.getElementById('color-picker').click();
+             }
+     
+             function changeBackgroundColor() {
+                 var color = document.getElementById('color-picker').value;
+                 document.getElementById('main-content').style.backgroundColor = color;
+             }
+       </script>
+      
+      
+ </body>
+</html>

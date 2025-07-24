@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   GigLancer
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .header .nav {
+            display: flex;
+            gap: 20px;
+        }
+        .header .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        .header .actions {
+            display: flex;
+            align-items: center;
+        }
+        .header .actions .profile-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        .search-bar input {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content .filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .content .filter .results {
+            font-size: 18px;
+        }
+        .content .filter .filter-options {
+            display: flex;
+            gap: 10px;
+        }
+        .content .filter .filter-options select {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .content .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 13px;
+            
+            
+        }
+        .content .grid .item {
+            background-color: #fff;
+           
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.5s ;
+            width:340px ;
+        }
+        .content .grid .item:hover{
+            box-shadow:3px 3px 10px 2px rgb(139, 139, 139);
+            width: 345px ;
+         
+        }
+        .content .grid .item img {
+            width: 100%;
+            height: auto;
+
+        }
+    
+        .content .grid .item .info {
+            padding: 10px;
+        }
+        .content .grid .item .info .title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .content .grid .item .info .author {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+        .content .grid .item .info .stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+        .footer .footer1 {
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer .footer1 .column {
+            width: 20%;
+        }
+        .footer .footer1 .column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .footer .footer1 .column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer .footer1 .column ul li {
+            margin-bottom: 5px;
+        }
+        .footer .footer1 .column ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+        }
+        .footer .bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .top-bar {
+            background-color: #fff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            box-shadow: 10px 10px 10px 10px  linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);;
+
+        }
+        .top-bar a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+        .footer {
+            background-color: #111;
+            padding: 40px 20px;
+        }
+        .footer .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .footer .columns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer .column {
+            flex: 1;
+            min-width: 150px;
+            margin: 10px 0;
+        }
+        .footer .column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .footer .column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer .column ul li {
+            margin-bottom: 8px;
+        }
+        .footer .column ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .footer .bottom-bar {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        .footer .bottom-bar .left {
+            display: flex;
+            align-items: center;
+        }
+        .footer .bottom-bar .left img {
+            height: 20px;
+            margin-right: 10px;
+        }
+        .footer .bottom-bar .right {
+            display: flex;
+            align-items: center;
+        }
+        .footer .bottom-bar .right a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: rgba(28, 28, 28,0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        } 
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 30px;
+        }
+        .navbar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .navbar .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .navbar .dropdown-content a:hover {
+            background-color: #6c6c6c;
+        }
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-right: 20px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            color: white;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar i {
+            margin-right: 10px;
+        }
+        .navbar .search-bar .search-icon {
+            color: white;
+        }
+        .navbar .search-bar .image-icon {
+            color: white;
+        }
+        .navbar .button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .navbar .button:hover {
+            background-color: #e0e0e0;
+        }
+        .navbar .icons i {
+            margin-right: 20px;
+            cursor: pointer;
+            color: #111;
+        }
+        .navbar .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .container:hover{
+            display: block;
+
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 300px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .card-subtitle {
+            color: #777;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .card-stats .stat {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #777;
+        }
+        .card-stats .stat i {
+            margin-right: 5px;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+        
+            background-color: #b12929(62,52,69,0.8);
+            backdrop-filter: blur(10px);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 97%;
+            
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+        .close {
+            color: palegreen;
+            float: right;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-images img {
+            margin-bottom: 10px;
+        }
+        .modal-icons {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background-color: transparent;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .modal-icons i {
+            font-size: 32px;
+            margin: 35px 50px 0px 0px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+        
+
+
+  </style>
+ </head>
+ <body>
+    <div  class="navbar">
+        <a class="logo" href="#">
+         GigLancer
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Explore
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+            For You
+          </a>
+          <a href="#">
+           Search & Explore
+          </a>
+          <a href="#">
+            Best of GigLancer
+          </a>
+         </div>
+        </div>
+        <a href="#">
+         Assets
+        </a>
+        <a href="#">
+         Jobs
+        </a>
+        <a href="gig_pro.html">
+         GigLancer
+         <span style="background-color: blue; color: white; padding: 2px 5px; border-radius: 3px;">
+          PRO
+         </span>
+        </a>
+        <div class="dropdown">
+         <a href="#">
+          Hire Freelancers
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+         Hire on GigLancer
+          </a>
+          <a href="./categorie.html">
+           Find creatives
+          </a>
+          <a href="./project.html">
+           My Freelance project
+          </a>
+         </div>
+        </div>
+        <div class="search-bar">
+         <i class="fas fa-search search-icon">
+         </i>
+         <input placeholder="Search..." type="text"/>
+         <i class="fas fa-image image-icon">
+         </i>
+        </div>
+        <button  class="button">
+         Share Your Work
+         <div style="display: none; "  class="con">
+            <div class="menu-item">
+                <i class="fas fa-pencil-alt"></i>
+                <div class="text">
+                    <div class="title">Project</div>
+                    <div class="description">Build a complete case study</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard"></i>
+                <div class="text">
+                    <div class="title">Service</div>
+                    <div class="description">Showcase your freelance offerings</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="text">
+                    <div class="title">Work In Progress</div>
+                    <div class="description">Posts that expire in 24 hours</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-video"></i>
+                <div class="text">
+                    <div class="title">Livestream</div>
+                    <div class="description">Broadcast live from your desktop</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+        </div>
+        </button>
+       <a href="chat.html"> <div class="icons">
+         <i class="fas fa-envelope">
+         </i>
+         <i class="fas fa-bell">
+         </i>
+        </div></a>
+        <a href="profile.html">
+        <img alt="Profile picture" class="profile-pic" height="30" src="https://storage.googleapis.com/a1aa/image/l2m9uMDsVaKiLhm5AMk7WHPx8ob6aQtBvh7Gi38bgmEeFp0JA.jpg" width="30"/></a>
+       </div>
+  <div class="content">
+   <div class="filter">
+    <div class="results">
+     Results
+    </div>
+    <div class="filter-options">
+     <select>
+      <option>
+       Most Appreciated
+      </option>
+      <option>
+       Most Viewed
+      </option>
+      <option>
+       Most Recent
+      </option>
+     </select>
+     <select>
+      <option>
+       Today
+      </option>
+      <option>
+       This Week
+      </option>
+      <option>
+       This Month
+      </option>
+     </select>
+    </div>
+   </div>
+   <div class="grid">
+    <div class="item card " onclick="openModal()" >
+     <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="300" src="https://storage.googleapis.com/a1aa/image/7DhlqsM758JfTaBc2hnfyqZureGCvl5qIq289c1dhgf1feT6E.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Logo - Brand Identity - Branding design for SmartSpace
+      </div>
+      <div class="author">
+       Abdul Aziz
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        306
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        1.8K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal()">
+          &times;
+         </span>
+         <div class="modal-images">
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0010.jpg" width="1200"/>
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0011.jpg" width="1200"/>
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0013.jpg" width="1200"/>
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.26_c65990ab.jpg" width="1200"/>
+          <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+            <a href="./profile.html">
+                <i class="fas fa-user">
+                </i>
+             </a>
+         <a href="./chat.html">
+            <i class="fas fa-briefcase">
+            </i>
+         </a>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+       
+    <div class="item card " onclick="openModal1()">
+     <img alt="R'n'D Labz" height="300" src="https://storage.googleapis.com/a1aa/image/9OMXMZbKHP62CtLafvhd3wCzj4CyeEIjUCak9HogyzZC4PpTA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       R'n'D Labz
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        1.2K
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        8.0K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal1">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal1()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0014.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0016.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0017.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal2()">
+     <img alt="webudding" height="300" src="https://storage.googleapis.com/a1aa/image/KmjhjLzdBzrvP1bUiw1bR0oAHj9lDhRmSk4oPsLEN4iDen0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       webudding
+      </div>
+      <div class="author">
+       d'Obren design
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        772
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        6.3K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal2">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal2()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0018.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0019.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0020.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0021.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal3()">
+     <img alt="LazyNight UX/UI Renewal" height="300" src="https://storage.googleapis.com/a1aa/image/NP1Vf4OvGEVBbi182wjoFBN9ChtOhJJO07lVxxTjhpGD8n0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       LazyNight UX/UI Renewal
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        301
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        3.0K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal3">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal3()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0035.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0036.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0037.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0038.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal4()">
+     <img alt="Pentibor logo &amp; Brand Identity design" height="300" src="https://storage.googleapis.com/a1aa/image/iR9YgWmCh26rFhtqa6kwncM7KJLwbqz4WFtEVmVXCzVBen0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Pentibor logo &amp; Brand Identity design
+      </div>
+      <div class="author">
+       Alef Smit
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        277
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        1.4K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal4">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal4()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0010.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0011.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0013.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.26_c65990ab.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+    <div class="item card " onclick="openModal5()">
+     <img alt="Children's book Project" height="300" src="https://storage.googleapis.com/a1aa/image/pesWsszyCfl3JUSadLr9h29XRukRqH4CHCyCk1aSOSXevfkOB.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Children's book Project
+      </div>
+      <div class="author">
+       Caner Şayak
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        45
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        2.4K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal5">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal5()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0010.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0011.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0013.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.26_c65990ab.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal6()">
+     <img alt="We Spirit" height="300" src="https://storage.googleapis.com/a1aa/image/9RKYjp9bT36UCdy5XyGBqrx3AZwqHEeiHx2Lz3mmHfZI4PpTA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       We Spirit
+      </div>
+      <div class="author">
+       Fernando Rafini
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        832
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        4.6K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal6">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal6()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0035.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0036.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0037.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0038.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal7()">
+     <img alt="La Duchesse" height="300" src="https://storage.googleapis.com/a1aa/image/WPoi9YybLrKpLZftz1Ce5VeKOUe5EA23ffp3gFRowFG7e7n0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       La Duchesse
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        1.1K
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        10.9K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal7">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal7()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0018.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0019.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0020.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0021.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal8()">
+     <img alt="OBJEKT" height="300" src="https://storage.googleapis.com/a1aa/image/VPveBSBBI51kTyfLaO66lDfFQJw8iYfzVynKwTKwTglNhfJdC.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       OBJEKT
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        537
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        3.2K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal8">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal8()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0018.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0019.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0020.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0021.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal9()">
+     <img alt="Press and magazines illustrations" height="300" src="https://storage.googleapis.com/a1aa/image/9XPwYgKu5OZxCV5M8ofHnEcGMn9KilevCA3nBK3yIshP4PpTA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Press and magazines illustrations
+      </div>
+      <div class="author">
+       Carlos Amigo
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        887
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        3.5K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal9">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal9()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0014.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0016.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0017.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal10()">
+     <img alt="Montag School - Visual Identity" height="300" src="https://storage.googleapis.com/a1aa/image/XdV6cGzFK5r6LRY7GP985D8VY8VdwzxWrJU7T8mwy4eE8n0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Montag School - Visual Identity
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        480
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        3.3K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal10">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal10()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0035.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0036.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0037.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0038.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal11()">
+     <img alt="FINNA | Swimming Fins Brand Identity" height="300" src="https://storage.googleapis.com/a1aa/image/YbeQ2FF0fhjfeQXGFfdezOUVDU6ViAR4DyqouaFlEwRKDen0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       FINNA | Swimming Fins Brand Identity
+      </div>
+      <div class="author">
+       Asja Dandylova
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        640
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        4.5K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal11">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal11()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0010.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0011.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0012.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0013.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.26_c65990ab.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal12()">
+     <img alt="June Logistics - Branding" height="300" src="https://storage.googleapis.com/a1aa/image/eh7RrtgRHoUsN6emLZ4Me58TViecsi2WDufMye5mEcYTAen0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       June Logistics - Branding
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        1.8K
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        13.2K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal12">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal12()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0018.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0019.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0020.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0021.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal13()">
+     <img alt="Boundless Journey Branding" height="300" src="https://storage.googleapis.com/a1aa/image/4PjJ5aWxz7aDKRvKs7KdduMEiXe8FMgnuS6SsMxNAaxf3PpTA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Boundless Journey Branding
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        354
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        4.5K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal13">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal13()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0014.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0016.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0017.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal14()">
+     <img alt="Five Tigers - Five blessings 五福临门" height="300" src="https://storage.googleapis.com/a1aa/image/I6nhiD1rxeUBTKsogxoqMeTOeA8rFFDFeTNJbsI9NekhAfT6E.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Five Tigers - Five blessings 五福临门
+      </div>
+      <div class="author">
+       五只老虎
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        480
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        3.2K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal14">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal14()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0035.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0036.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0037.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0038.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal15()">
+     <img alt="Bedroom" height="300" src="https://storage.googleapis.com/a1aa/image/fFKoqbaZRAz7RCjM9zEVGYGfi5EqErmPjPenRTfxTLLugfJdC.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Bedroom
+      </div>
+      <div class="author">
+       TETIANA VIZIRSKA
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        187
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        559
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal15">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal15()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0035.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0036.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0037.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0038.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+         <a href="./profile.html">
+            <i class="fas fa-user">
+            </i>
+         </a>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal16()">
+     <img alt="Scandinavian living room" height="300" src="https://storage.googleapis.com/a1aa/image/y5VMsrWRl4ISC9FO9iox4ZZgRa3F23CULZi0MuVcz1tEen0JA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Scandinavian living room
+      </div>
+      <div class="author">
+       Michael Bratani
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        269
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        2.4K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal16()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0018.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0019.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0020.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0021.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">.
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+       
+
+
+    <div class="item card " onclick="openModal17()">
+     <img alt="AVRE - Local Tennis Club Brand Identity" height="300" src="https://storage.googleapis.com/a1aa/image/RQQVju2Zo9JvP54i934znZlUsGmSGpaTfsKKmEbeC1AQ4PpTA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       AVRE - Local Tennis Club Brand Identity
+      </div>
+      <div class="author">
+       Multiple Owners
+      </div>
+      <div class="stats">
+       <div>
+        <i class="fas fa-heart">
+        </i>
+        850
+       </div>
+       <div>
+        <i class="fas fa-eye">
+        </i>
+        7.1K
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal" id="myModal17">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal17()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0014.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0015.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0016.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.32.42_111aea84.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0017.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">.
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+    <div class="item card " onclick="openModal18()">
+     <img alt="Visualization of the apartment on Belota." height="300" src="https://storage.googleapis.com/a1aa/image/uGMvzzmkcureEigbheQZD9bnxRmUqMK71XLGXnmU8i663PpTA.jpg" width="400"/>
+     <div class="info">
+      <div class="title">
+       Visualization of the apartment on Belota.
+      </div>
+      <div class="author">
+       Olesia Tomofeeva
+      </div>
+      <div class="stats">
+        <div class="stats">
+            <div>
+             <i class="fas fa-heart">
+             </i>
+             850
+            </div>
+            <div>
+             <i class="fas fa-eye">
+             </i>
+             7.1K
+            </div>
+           </div>
+      </div>
+     </div>
+    </div>
+    <div class="item card " onclick="openModal19()">
+        <img alt="Scandinavian living room" height="300" src="https://storage.googleapis.com/a1aa/image/y5VMsrWRl4ISC9FO9iox4ZZgRa3F23CULZi0MuVcz1tEen0JA.jpg" width="400"/>
+        <div class="info">
+         <div class="title">
+          Scandinavian living room
+         </div>
+         <div class="author">
+          Michael Bratani
+         </div>
+         <div class="stats">
+          <div>
+           <i class="fas fa-heart">
+           </i>
+           269
+          </div>
+          <div>
+           <i class="fas fa-eye">
+           </i>
+           2.4K
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="modal" id="myModal18">
+        <div class="modal-content">
+         <span class="close" onclick="closeModal18()">
+          &times;
+         </span>
+         <div class="modal-images">
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0035.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0036.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0037.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0038.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+            <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+         </div>
+         <div class="modal-icons">
+          <i class="fas fa-user">
+          </i>
+          <i class="fas fa-briefcase">
+          </i>
+          <i class="fas fa-tools">
+          </i>
+          <i class="fas fa-save">
+          </i>
+          <i class="fas fa-share-alt">
+          </i>
+          <i class="fas fa-heart">
+          </i>
+         </div>
+        </div>
+       </div>
+   
+   </div>
+   
+  </div>
+  <div class="modal" id="myModal19">
+    <div class="modal-content">
+     <span class="close" onclick="closeModal19()">
+      &times;
+     </span>
+     <div class="modal-images">
+        <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0018.jpg" width="1200"/>
+        <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0019.jpg" width="1200"/>
+        <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0020.jpg" width="1200"/>
+        <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0021.jpg" width="1200"/>
+        <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/IMG-20241023-WA0023.jpg" width="1200"/>
+        <img alt="Logo - Brand Identity - Branding design for SmartSpace" height="700" src="./project/WhatsApp Image 2024-10-23 at 13.33.42_d06a9599.jpg" width="1200"/>
+     </div>
+     <div class="modal-icons">
+      <i class="fas fa-user">
+      </i>
+      <i class="fas fa-briefcase">
+      </i>
+      <i class="fas fa-tools">
+      </i>
+      <i class="fas fa-save">
+      </i>
+      <i class="fas fa-share-alt">
+      </i>
+      <i class="fas fa-heart">
+      </i>
+     </div>
+    </div>
+    
+   </div>
+
+
+    
+
+
+
+  <div  class="top-bar">
+    Upgrade to Giglancer Pro today: Get advanced analytics, a custom portfolio website, and more features to grow your creative career.
+    <a href="/gig_pro.html">
+     Start your 7 day free trial
+    </a>
+   </div>
+   <div class="footer">
+    <div style="margin-left:10vh ;" class="logo">
+     Giglancer
+    </div>
+    <div style="margin-left:70vh;" class="columns">
+     <div class="column">
+      <h3>
+       Built For Creatives
+      </h3>
+      <ul>
+       <li>
+        <a href="gig_pro.html">
+         Try Giglancer Pro
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Find Inspiration
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Get Hired
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Sell Creative Assets
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Sell Freelance Services
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="column">
+      <h3>
+       Find Talent
+      </h3>
+      <ul>
+       <li>
+        <a href="#">
+         Post a Job
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Graphic Designers
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Photographers
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Video Editors
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Web Designers
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Illustrators
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="column">
+      <h3>
+       Giglancer
+      </h3>
+      <ul>
+       <li>
+        <a href="/about.html">
+         About Giglancer
+        </a>
+       </li>
+     
+   
+       <li>
+        <a href="#">
+         Blog
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Careers
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Help Center
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         Contact Us
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="column">
+      <h3>
+       Social
+      </h3>
+      <ul>
+       <li>
+        <a href="#">
+         <i class="fab fa-instagram">
+         </i>
+         Instagram
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         <i class="fab fa-twitter">
+         </i>
+         Twitter
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         <i class="fab fa-pinterest">
+         </i>
+         Pinterest
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         <i class="fab fa-facebook">
+         </i>
+         Facebook
+        </a>
+       </li>
+       <li>
+        <a href="#">
+         <i class="fab fa-linkedin">
+         </i>
+         LinkedIn
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   <script>
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+
+
+    function openModal1() {
+        document.getElementById("myModal1").style.display = "block";
+    }
+    function closeModal1() {
+        document.getElementById("myModal1").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal1");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+    function openModal2() {
+        document.getElementById("myModal2").style.display = "block";
+    }
+    function closeModal2() {
+        document.getElementById("myModal2").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal2");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    function openModal3() {
+        document.getElementById("myModal3").style.display = "block";
+    }
+    function closeModal3() {
+        document.getElementById("myModal3").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal3");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    function openModal14() {
+        document.getElementById("myModal4").style.display = "block";
+    }
+    function closeModal4() {
+        document.getElementById("myModal4").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal4");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+    function openModal5() {
+        document.getElementById("myModal5").style.display = "block";
+    }
+    function closeModal5() {
+        document.getElementById("myModal5").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal5");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+    function openModal6() {
+        document.getElementById("myModal6").style.display = "block";
+    }
+    function closeModal6() {
+        document.getElementById("myModal6").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal6");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal7() {
+        document.getElementById7("myModal7").style.display = "block";
+    }
+    function closeModa7() {
+        document.getElementById("myModal7").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal7");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal8() {
+        document.getElementById("myModal8").style.display = "block";
+    }
+    function closeModal8() {
+        document.getElementById("myModal8").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal8");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+
+    function openModal9() {
+        document.getElementById("myModal9").style.display = "block";
+    }
+    function closeModal19() {
+        document.getElementById("myModal9").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal9");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal10() {
+        document.getElementById("myModal10").style.display = "block";
+    }
+    function closeModal10() {
+        document.getElementById("myModal10").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal10");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal11() {
+        document.getElementById("myModal11").style.display = "block";
+    }
+    function closeModal11() {
+        document.getElementById("myModal11").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal11");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+
+   
+
+
+
+
+
+
+    function openModal12() {
+        document.getElementById("myModal12").style.display = "block";
+    }
+    function closeModal12() {
+        document.getElementById("myModal12").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal12");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal13() {
+        document.getElementById("myModal13").style.display = "block";
+    }
+    function closeModal13() {
+        document.getElementById("myModal13").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal13");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal14() {
+        document.getElementById("myModal14").style.display = "block";
+    }
+    function closeModal14() {
+        document.getElementById("myModal14").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal14");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+
+    function openModal15() {
+        document.getElementById("myModal15").style.display = "block";
+    }
+    function closeModal15() {
+        document.getElementById("myModal15").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal15");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+ 
+
+    function openModal16() {
+        document.getElementById("myModal16").style.display = "block";
+    }
+    function closeModal16() {
+        document.getElementById("myModal16").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal16");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+    function openModal17() {
+        document.getElementById("myModal17").style.display = "block";
+    }
+    function closeModal17() {
+        document.getElementById("myModal17").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal17");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+
+
+    function openModal18() {
+        document.getElementById("myModal18").style.display = "block";
+    }
+    function closeModal18() {
+        document.getElementById("myModal18").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal18");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal19() {
+        document.getElementById("myModal19").style.display = "block";
+    }
+    function closeModal19() {
+        document.getElementById("myModal19").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal19");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    function openModal20() {
+        document.getElementById("myModal20").style.display = "block";
+    }
+    function closeModal20() {
+        document.getElementById("myModal20").style.display = "none";
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal20");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+
+
+
+
+
+   </script>
+ </body>
+</html>

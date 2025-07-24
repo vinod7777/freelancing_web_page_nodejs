@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+ <head>
+  <title>
+   Chat Interface
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dedede;
+           
+        }
+        .container {
+            display: flex;
+            margin-left: 2.5%;
+            margin-top: 2.5%;
+            margin-bottom: 1%;
+            width: 95%;
+            box-shadow: 1px 1px 10px 0.5px #d5d5d5;
+            height: 85vh;
+            border: 0px solid black;
+            border-radius: 3PX;
+            background-color: white;
+        } 
+        .sidebar {
+            width: 25%;
+            border-right: 1px solid #ddd;
+            padding: 10px;
+        }
+        .sidebar input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .sidebar .contact {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .sidebar .contact img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .sidebar .contact .name {
+            font-weight: bold;
+        }
+        .sidebar .contact .time {
+            color: #888;
+            font-size: 12px;
+        }
+        .chat {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #ddd;
+        }
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-header img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .chat-header .name {
+            font-weight: bold;
+        }
+        .chat-header .icons {
+            margin-left: auto;
+        }
+        .chat-header .icons i {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .chat-messages .message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .chat-messages .message img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .chat-messages .message .text {
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+            position: relative;
+        }
+        .chat-messages .message .time {
+            color: #888;
+            font-size: 12px;
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .chat-messages .message.sent .text {
+            background-color: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+        .chat-messages .message.sent .time {
+            left: auto;
+            right: -50px;
+        }
+        .chat-messages .message.sent {
+            justify-content: flex-end;
+        }
+        .chat-footer {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .chat-footer button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .profile {
+            width: 25%;
+            padding: 10px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+        .profile .name {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .profile .location {
+            text-align: center;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .profile .actions button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+        }
+        .profile .actions button i {
+            margin-right: 10px;
+        }
+
+
+        .navbar {
+            display: flex;
+            align-items: center;
+          background-color: rgba(28, 28, 28,0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 30px;
+        }
+        .navbar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(28, 28, 28, 0.8);
+            backdrop-filter: blur(10px);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .navbar .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .navbar .dropdown-content a:hover {
+            background-color: #6c6c6c;
+        }
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-right: 20px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            color: white;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+        }
+        .navbar .search-bar i {
+            margin-right: 10px;
+        }
+        .navbar .search-bar .search-icon {
+            color: white;
+        }
+        .navbar .search-bar .image-icon {
+            color: white;
+        }
+        .navbar .button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .navbar .button:hover {
+            background-color: #e0e0e0;
+        }
+        .navbar .icons i {
+            margin-right: 20px;
+            cursor: pointer;
+            color: #111;
+        }
+        .navbar .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+        .footer .footer1 {
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer .footer1 .column {
+            width: 20%;
+        }
+        .footer .footer1 .column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .footer .footer1 .column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer .footer1 .column ul li {
+            margin-bottom: 5px;
+        }
+        .footer .footer1 .column ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+        }
+        .footer .bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .footer {
+            background-color: #111;
+            padding: 40px 20px;
+        }
+        .footer .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .footer .columns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer .column {
+            flex: 1;
+            min-width: 150px;
+            margin: 10px 0;
+        }
+        .footer .column h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .footer .column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer .column ul li {
+            margin-bottom: 8px;
+        }
+        .footer .column ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .footer .bottom-bar {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        .footer .bottom-bar .left {
+            display: flex;
+            align-items: center;
+        }
+        .footer .bottom-bar .left img {
+            height: 20px;
+            margin-right: 10px;
+        }
+        .footer .bottom-bar .right {
+            display: flex;
+            align-items: center;
+        }
+        .footer .bottom-bar .right a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .top-bar {
+            background-color: #fff;
+            color: white;
+            padding: 10px;
+            margin-top: 2.5%;
+            text-align: center;
+            font-size: 14px;
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            box-shadow: 10px 10px 10px 10px  linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);;
+
+        }
+        .top-bar a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+       
+  </style>
+ </head>
+ <body>
+    <div  class="navbar">
+        <a class="logo" href="main.html">
+         GigLancer
+        </a>
+        <div class="dropdown">
+         <a href="main.html">
+          Explore
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="chat.html">
+           Home
+          </a>
+          <a href="#">
+           Project Based Module 
+          </a>
+          <a href="#">
+           Tasks
+          </a>
+         </div>
+        </div>
+        <a href="">
+         Assets
+        </a>
+        <a href="#">
+         Jobs
+        </a>
+        <a href="gig_pro.html">
+         GigLancer
+         <span style="background-color: blue; color: white; padding: 2px 5px; border-radius: 3px;">
+          PRO
+         </span>
+        </a>
+        <div class="dropdown">
+         <a href="main.html">
+          Hire Freelancers
+          <i class="fas fa-caret-down">
+          </i>
+         </a>
+         <div class="dropdown-content">
+          <a href="#">
+            GIG works 
+          </a>
+          <a href="#">
+             project based works 
+          </a>
+          <a href="#">
+            Tasks
+          </a>
+         </div>
+        </div>
+        <div class="search-bar">
+         <i class="fas fa-search search-icon">
+         </i>
+         <input placeholder="Search..." type="text"/>
+         <i class="fas fa-image image-icon">
+         </i>
+        </div>
+        <button  class="button">
+         Share Your Work
+         <div style="display: none;" class="container">
+            <div class="menu-item">
+                <i class="fas fa-pencil-alt"></i>
+                <div class="text">
+                    <div class="title">Project</div>
+                    <div class="description">Build a complete case study</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-clipboard"></i>
+                <div class="text">
+                    <div class="title">Service</div>
+                    <div class="description">Showcase your freelance offerings</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="text">
+                    <div class="title">Work In Progress</div>
+                    <div class="description">Posts that expire in 24 hours</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-video"></i>
+                <div class="text">
+                    <div class="title">Livestream</div>
+                    <div class="description">Broadcast live from your desktop</div>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </div>
+        </div>
+        </button>
+        <div class="icons">
+         <i class="fas fa-envelope">
+         </i>
+         <i class="fas fa-bell">
+         </i>
+        </div>
+       <a href="profile.html"> <img alt="Profile picture" class="profile-pic" height="30" src="https://storage.googleapis.com/a1aa/image/l2m9uMDsVaKiLhm5AMk7WHPx8ob6aQtBvh7Gi38bgmEeFp0JA.jpg" width="30"/></a>
+    </div>
+
+
+    <div class="container">
+        <div class="sidebar">
+         <input placeholder="Search messages..." type="text"/>
+         <div class="contact" onclick="openChat('akhil')">
+          <img alt="Profile picture of AKHIL GFX" height="40" src="https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg" width="40"/>
+          <div>
+           <div class="name">
+            AKHIL GFX
+           </div>
+           <div class="time">
+            a day ago
+           </div>
+           <div>
+             You're welcome!
+           </div>
+          </div>
+         </div>
+         <div class="contact" onclick="openChat('pavan')">
+          <img alt="Profile picture of Pavan UI/UX" height="40" src="https://storage.googleapis.com/a1aa/image/RwoMdvacba6cFdeDSTpIstKCgxe8nhixRS4Tm1CCFjtWEBqTA.jpg" width="40"/>
+          <div>
+           <div class="name">
+            Pavan UI/UX
+           </div>
+           <div class="time">
+            2 days ago
+           </div>
+           <div>
+            I'm on that work !
+           </div>
+          </div>
+         </div>
+         <div class="contact" onclick="openChat('harsha')">
+          <img alt="Profile picture of Harsha Web" height="40" src="https://storage.googleapis.com/a1aa/image/vR2D0AmxiPJcGRABq44ejdfK7BqKFoAsWPNuHYmAJW4TEBqTA.jpg" width="40"/>
+          <div>
+           <div class="name">
+            Harsha Web
+           </div>
+           <div class="time">
+            3 days ago
+           </div>
+           <div>
+            You're welcome!
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="chat">
+         <div class="chat-header">
+          <img alt="Profile picture of AKHIL GFX" height="40" id="chat-header-img" src="https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg" width="40"/>
+          <div class="name" id="chat-header-name">
+           AKHIL GFX
+          </div>
+          <div class="icons">
+           <i class="fas fa-trash">
+           </i>
+           <i class="fas fa-exclamation-triangle">
+           </i>
+           <i class="fas fa-ban">
+           </i>
+           <i class="fas fa-ellipsis-h">
+           </i>
+          </div>
+         </div>
+         <div class="chat-messages" id="chat-messages">
+          <div class="message sent">
+           <div class="text">
+            The project is completed.
+           </div>
+          </div>
+          <div class="message">
+           <img alt="Profile picture of AKHIL GFX" height="40" src="https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg" width="40"/>
+           <div class="text">
+            Thank you! It looks great.
+           </div>
+          </div>
+          <div class="message sent">
+           <div class="text">
+            You're welcome!
+           </div>
+          </div>
+         </div>
+         <div class="chat-footer">
+          <input id="message-input" placeholder="Write a message..." type="text"/>
+          <button onclick="sendMessage()">
+           Send
+          </button>
+         </div>
+        </div>
+        <div class="profile" id="profile">
+         <img alt="Profile picture of AKHIL GFX" height="100" id="profile-img" src="https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg" width="100"/>
+         <div class="name" id="profile-name">
+          AKHIL GFX
+         </div>
+         <div class="location" id="profile-location">
+          Vijayawada, India
+         </div>
+         <div class="actions">
+          <button>
+           <i class="fas fa-file-alt">
+           </i>
+           New Project Proposal
+          </button>
+          <a href="payment.html"><button>
+            <i class="fas fa-dollar-sign">
+            </i>
+            Request Payment
+           </button></a>
+          <button>
+           <i class="fas fa-video">
+           </i>
+           Join Video Call
+          </button>
+         </div>
+        </div>
+       </div>
+       <script>
+        function openChat(contact) {
+                 const chatHeaderImg = document.getElementById('chat-header-img');
+                 const chatHeaderName = document.getElementById('chat-header-name');
+                 const chatMessages = document.getElementById('chat-messages');
+                 const profileImg = document.getElementById('profile-img');
+                 const profileName = document.getElementById('profile-name');
+                 const profileLocation = document.getElementById('profile-location');
+     
+                 if (contact === 'akhil') {
+                     chatHeaderImg.src = 'https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg';
+                     chatHeaderName.textContent = 'AKHIL GFX';
+                     chatMessages.innerHTML = `
+                         <div class="message sent">
+                             <div class="time">3:00 PM</div>
+                             <div class="text">The project is completed.</div>
+                         </div>
+                         <div class="message">
+                             <div class="time">3:05 PM</div>
+                             <img src="https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg" alt="Profile picture of AKHIL GFX" width="40" height="40">
+                             <div class="text">Thank you! It looks great.</div>
+                         </div>
+                         <div class="message sent">
+                             <div class="time">3:10 PM</div>
+                             <div class="text">You're welcome!</div>
+                         </div>
+                     `;
+                     profileImg.src = 'https://storage.googleapis.com/a1aa/image/c3bALCsJ95LtCppcV13PM9eeyOK2P3SF9A8oDgfMrYKoICUnA.jpg';
+                     profileName.textContent = 'AKHIL GFX';
+                     profileLocation.textContent = 'Vijayawada, India';
+                 } else if (contact === 'pavan') {
+                     chatHeaderImg.src = 'https://storage.googleapis.com/a1aa/image/RwoMdvacba6cFdeDSTpIstKCgxe8nhixRS4Tm1CCFjtWEBqTA.jpg';
+                     chatHeaderName.textContent = 'Pavan UI/UX';
+                     chatMessages.innerHTML = `
+                         <div class="message sent">
+                             <div class="time">2:00 PM</div>
+                             <div class="text">Sure, I can help with that.</div>
+                         </div>
+                         <div class="message">
+                             <div class="time">2:05 PM</div>
+                             <img src="https://storage.googleapis.com/a1aa/image/RwoMdvacba6cFdeDSTpIstKCgxe8nhixRS4Tm1CCFjtWEBqTA.jpg" alt="Profile picture of Pavan UI/UX" width="40" height="40">
+                             <div class="text">Thank you! It looks great.</div>
+                         </div>
+                         <div class="message sent">
+                             <div class="time">2:10 PM</div>
+                             <div class="text">I'm on that work !</div>
+                         </div>
+                     `;
+                     profileImg.src = 'https://storage.googleapis.com/a1aa/image/RwoMdvacba6cFdeDSTpIstKCgxe8nhixRS4Tm1CCFjtWEBqTA.jpg';
+                     profileName.textContent = 'Pavan UI/UX';
+                     profileLocation.textContent = 'Hyderabad, India';
+                 } else if (contact === 'harsha') {
+                     chatHeaderImg.src = 'https://storage.googleapis.com/a1aa/image/vR2D0AmxiPJcGRABq44ejdfK7BqKFoAsWPNuHYmAJW4TEBqTA.jpg';
+                     chatHeaderName.textContent = 'Harsha Web';
+                     chatMessages.innerHTML = `
+                         <div class="message sent">
+                             <div class="time">3:00 PM</div>
+                             <div class="text">Payment request sir !</div>
+                         </div>
+                         <div class="message">
+                             <div class="time">3:05 PM</div>
+                             <img src="https://storage.googleapis.com/a1aa/image/vR2D0AmxiPJcGRABq44ejdfK7BqKFoAsWPNuHYmAJW4TEBqTA.jpg" alt="Profile picture of Harsha Web" width="40" height="40">
+                             <div class="text">yeah, i will do that !</div>
+                         </div>
+                         <div class="message sent">
+                             <div class="time">3:10 PM</div>
+                             <div class="text">You're welcome!</div>
+                         </div>
+                     `;
+                     profileImg.src = 'https://storage.googleapis.com/a1aa/image/vR2D0AmxiPJcGRABq44ejdfK7BqKFoAsWPNuHYmAJW4TEBqTA.jpg';
+                     profileName.textContent = 'Harsha Web';
+                     profileLocation.textContent = 'Bangalore, India';
+                 }
+             }
+     
+             function sendMessage() {
+                 const messageInput = document.getElementById('message-input');
+                 const chatMessages = document.getElementById('chat-messages');
+                 const messageText = messageInput.value.trim();
+     
+                 if (messageText !== '') {
+                     const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                     const newMessage = document.createElement('div');
+                     newMessage.classList.add('message', 'sent');
+                     newMessage.innerHTML = `
+                         <div class="time">${currentTime}</div>
+                         <div class="text">${messageText}</div>
+                     `;
+                     chatMessages.appendChild(newMessage);
+                     messageInput.value = '';
+                     chatMessages.scrollTop = chatMessages.scrollHeight;
+                 }
+             }
+       </script>
+
+<div  class="top-bar">
+    Upgrade to Giglancer Pro today: Get advanced analytics, a custom portfolio website, and more features to grow your creative career.
+    <a href="gig_pro.html">
+     Start your 7 day free trial
+    </a>
+   </div>
+          <div class="footer">
+            <div style="margin-left:10vh ;" class="logo">
+             Giglancer
+            </div>
+            <div style="margin-left:70vh;" class="columns">
+             <div class="column">
+              <h3>
+               Built For Creatives
+              </h3>
+              <ul>
+               <li>
+                <a href="gig_pro.html">
+                 Try Giglancer Pro
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Find Inspiration
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Get Hired
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Sell Creative Assets
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Sell Freelance Services
+                </a>
+               </li>
+              </ul>
+             </div>
+             <div class="column">
+              <h3>
+               Find Talent
+              </h3>
+              <ul>
+               <li>
+                <a href="#">
+                 Post a Job
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Graphic Designers
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Photographers
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Video Editors
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Web Designers
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Illustrators
+                </a>
+               </li>
+              </ul>
+             </div>
+             <div class="column">
+              <h3>
+               Giglancer
+              </h3>
+              <ul>
+               <li>
+                <a href="about.html">
+                 About Giglancer
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Blog
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Careers
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Help Center
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 Contact Us
+                </a>
+               </li>
+              </ul>
+             </div>
+             <div class="column">
+              <h3>
+               Social
+              </h3>
+              <ul>
+               <li>
+                <a href="#">
+                 <i class="fab fa-instagram">
+                 </i>
+                 Instagram
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <i class="fab fa-twitter">
+                 </i>
+                 Twitter
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <i class="fab fa-pinterest">
+                 </i>
+                 Pinterest
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <i class="fab fa-facebook">
+                 </i>
+                 Facebook
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <i class="fab fa-linkedin">
+                 </i>
+                 LinkedIn
+                </a>
+               </li>
+              </ul>
+             </div>
+            </div>
+           </div>
+ 
+    </body>
+</html>
